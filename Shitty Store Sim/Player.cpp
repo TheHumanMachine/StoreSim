@@ -9,32 +9,72 @@ Player::Player()
 void Player::printInventory()
 {
 	for (int i = 0; i < _inventory.size(); i++){
-		std::cout << i + 1 << _inventory[i]->getName() << std::endl;
+		std::cout << i + 1 << " " << _inventory[i]->getName() << std::endl;
 	}
 }
 
-void Player::deleteItemFromInventory(int i)
+bool Player::clearSoldItem(int i)
 {
-	_inventory.erase(_inventory.begin() + (i - 1));
+	if (_inventory[i]){
+
+		std::vector<Item*>::iterator it;
+		for (it = _inventory.begin(); it != _inventory.end();){
+
+			if ((*it) == _inventory[i]){
+				//delete *it;
+				it = _inventory.erase(it);
+				return true;
+			}
+			else{
+				it++;
+			}
+
+		}
+		return false;
+	}
+	else{
+		return false;
+	}
+
 }
 
-Item *Player::sellItem(int i)
+
+bool Player::sellItem(int storeMoney, int itemPlace)
 {
-	return _inventory[i - 1];
+
+	if (storeMoney > _inventory[itemPlace - 1]->getPrice()){
+		_money += _inventory[itemPlace - 1]->getPrice();
+		//clearSoldItem(itemPlace - 1);
+		return true;
+	}
+	else{
+		return false;
+	}
 }
 
+Item *Player::getItem(int i)
+{
+	return _inventory[i];
+}
 
+void Player::recieveItem(Item *item)
+{
+	_inventory.push_back(std::move(item));
+}
 
 bool Player::buyItem(Item *item)
 {
 	if (_money > item->getPrice()){
 		_money -= item->getPrice();
-		Item *newItem = item;
-		_inventory.push_back(newItem);
+		_inventory.push_back(std::move(item));
 		return true;
 	}
 	else{
-		std::cout << "You don't have enough money for" << item->getName() << std::endl;
 		return false;
 	}
+}
+
+void Player::removeMoney(int itemCost)
+{
+	_money -= itemCost;
 }

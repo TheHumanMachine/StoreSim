@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BuyAndSellBase.cpp" />
     <ClCompile Include="Interaction.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
@@ -71,6 +72,7 @@
     <ClCompile Include="Store.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BuyAndSellBase.h" />
     <ClInclude Include="Interaction.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Player.h" />

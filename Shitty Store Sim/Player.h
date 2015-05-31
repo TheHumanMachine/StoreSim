@@ -3,18 +3,33 @@
 #include <iostream>
 #include "Item.h"
 
+
+
 class Player
 {
 public:
 	Player();
+
+
+
+
+
+
+
+
+	//Selling and Buying functions
 	void printInventory();
-	int getPlayerMoney() const { return _money; }
-	void deleteItemFromInventory(int i);
-	Item *sellItem(int i);
+	bool clearSoldItem(int i);
+
+	Item *getItem(int i);
+	bool sellItem(int money, int i);
+	void recieveItem(Item *item);
 	bool buyItem(Item *item);
-	void removeItemFromInventory(Item *item);
 	int _sizeOfInventory()const { return _inventory.size(); }
-	void addPlayerMoney(int m){ _money += m; }
+
+	int getMoney() const { return _money; }
+	void addMoney(int m){ _money += m; }
+	void removeMoney(int itemCost);
 
 private:
 	int _money;
